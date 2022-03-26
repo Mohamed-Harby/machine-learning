@@ -1,3 +1,3 @@
 ## machine-learning
 
-Implementations for machine learning algorithms
+Implementations for machine learning algorithms.
