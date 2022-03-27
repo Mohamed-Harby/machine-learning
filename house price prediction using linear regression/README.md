@@ -8,23 +8,23 @@ from sklearn.metrics import mean_squared_error
 
 
 ```python
-housing_data = _california_housing.fetch_california_housing()
+data = _california_housing.fetch_california_housing()
 ```
 
 
 ```python
-Features = pd.DataFrame(housing_data.data, columns=housing_data.feature_names)
-Target = pd.DataFrame(housing_data.target, columns=['Target'])
+features = pd.DataFrame(data.data, columns=data.feature_names)
+target = pd.DataFrame(data.target, columns=['Target'])
 ```
 
 
 ```python
-df = Features.join(Target)
+data_frame = features.join(target)
 ```
 
 
 ```python
-housing_data.feature_names
+data.feature_names
 ```
 
 
@@ -43,7 +43,7 @@ housing_data.feature_names
 
 
 ```python
-df.head()
+data_frame.head()
 ```
 
 
@@ -147,7 +147,7 @@ df.head()
 
 
 ```python
-df.shape
+data_frame.shape
 ```
 
 
@@ -159,160 +159,7 @@ df.shape
 
 
 ```python
-df.columns.values
-```
-
-
-
-
-    array(['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 'Population',
-           'AveOccup', 'Latitude', 'Longitude', 'Target'], dtype=object)
-
-
-
-
-```python
-df.describe()
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>MedInc</th>
-      <th>HouseAge</th>
-      <th>AveRooms</th>
-      <th>AveBedrms</th>
-      <th>Population</th>
-      <th>AveOccup</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th>Target</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>20640.000000</td>
-      <td>20640.000000</td>
-      <td>20640.000000</td>
-      <td>20640.000000</td>
-      <td>20640.000000</td>
-      <td>20640.000000</td>
-      <td>20640.000000</td>
-      <td>20640.000000</td>
-      <td>20640.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>3.870671</td>
-      <td>28.639486</td>
-      <td>5.429000</td>
-      <td>1.096675</td>
-      <td>1425.476744</td>
-      <td>3.070655</td>
-      <td>35.631861</td>
-      <td>-119.569704</td>
-      <td>2.068558</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>1.899822</td>
-      <td>12.585558</td>
-      <td>2.474173</td>
-      <td>0.473911</td>
-      <td>1132.462122</td>
-      <td>10.386050</td>
-      <td>2.135952</td>
-      <td>2.003532</td>
-      <td>1.153956</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>0.499900</td>
-      <td>1.000000</td>
-      <td>0.846154</td>
-      <td>0.333333</td>
-      <td>3.000000</td>
-      <td>0.692308</td>
-      <td>32.540000</td>
-      <td>-124.350000</td>
-      <td>0.149990</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>2.563400</td>
-      <td>18.000000</td>
-      <td>4.440716</td>
-      <td>1.006079</td>
-      <td>787.000000</td>
-      <td>2.429741</td>
-      <td>33.930000</td>
-      <td>-121.800000</td>
-      <td>1.196000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>3.534800</td>
-      <td>29.000000</td>
-      <td>5.229129</td>
-      <td>1.048780</td>
-      <td>1166.000000</td>
-      <td>2.818116</td>
-      <td>34.260000</td>
-      <td>-118.490000</td>
-      <td>1.797000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>4.743250</td>
-      <td>37.000000</td>
-      <td>6.052381</td>
-      <td>1.099526</td>
-      <td>1725.000000</td>
-      <td>3.282261</td>
-      <td>37.710000</td>
-      <td>-118.010000</td>
-      <td>2.647250</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>15.000100</td>
-      <td>52.000000</td>
-      <td>141.909091</td>
-      <td>34.066667</td>
-      <td>35682.000000</td>
-      <td>1243.333333</td>
-      <td>41.950000</td>
-      <td>-114.310000</td>
-      <td>5.000010</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-```python
-df.corr()
+data_frame.corr()  # MedInc has relation with Target
 ```
 
 
@@ -464,7 +311,7 @@ df.corr()
 
 
 ```python
-df[['MedInc', 'Target']].describe()
+data_frame[['MedInc', 'Target']].describe()  # max value is very bigger than 75% of data exammples
 ```
 
 
@@ -541,13 +388,13 @@ df[['MedInc', 'Target']].describe()
 
 
 ```python
-df = df[df.Target < 3.2]
-df = df[df.MedInc < 9]
+data_frame = data_frame[data_frame.Target < 3.2]
+data_frame = data_frame[data_frame.MedInc < 9]
 ```
 
 
 ```python
-df[['MedInc', 'Target']].describe()
+data_frame[['MedInc', 'Target']].describe()
 ```
 
 
@@ -629,20 +476,19 @@ def normalize(arr):
     min = arr.min()
     return pd.Series([(i - min) / (max - min) for i in arr])
 
-X = normalize(df.MedInc)
-y = normalize(df.Target)
+X = normalize(data_frame.MedInc)
+y = normalize(data_frame.Target)
 ```
 
 
 ```python
-data = {'MedInc':X, 'Target':y}
-data_frame = pd.DataFrame(data=data)
+tmp = {'MedInc':X, 'Target':y}
+data_frame = pd.DataFrame(data=tmp)
 ```
 
 
 ```python
-data = data_frame
-data.describe()
+data_frame.describe()
 ```
 
 
@@ -729,7 +575,7 @@ plt.show()
 
 
     
-![png](output_16_0.png)
+![png](output_14_0.png)
     
 
 
@@ -737,12 +583,8 @@ plt.show()
 ```python
 from sklearn import linear_model
 model = linear_model.LinearRegression()
-```
-
-
-```python
-X = data[['MedInc']]
-y = data[['Target']]
+X = data_frame[['MedInc']]
+y = data_frame[['Target']]
 model.fit(X, y)
 ```
 
@@ -772,11 +614,6 @@ plt.show()
 
 
     
-![png](output_20_0.png)
+![png](output_17_0.png)
     
 
-
-
-```python
-
-```
